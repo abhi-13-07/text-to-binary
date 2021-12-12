@@ -2,11 +2,22 @@ const input = document.getElementById("input");
 const output = document.getElementById("output");
 const convertButton = document.getElementById("convert-btn");
 const swapButton = document.getElementById("swap-btn");
+const copyButton = document.getElementById("copy-btn");
 
 let inputMode = "string";
 
 swapButton.addEventListener("click", () => {
 	changeInputMode();
+});
+
+copyButton.addEventListener("click", async () => {
+	try {
+		if (!output.value) return;
+		await navigator.clipboard.writeText(output.value);
+		alert("Copied!");
+	} catch (err) {
+		console.log(err);
+	}
 });
 
 convertButton.addEventListener("click", () => {
