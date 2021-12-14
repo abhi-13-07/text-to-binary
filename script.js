@@ -4,11 +4,22 @@ const convertButton = document.getElementById("convert-btn");
 const swapButton = document.getElementById("swap-btn");
 const copyButton = document.getElementById("copy-btn");
 const inputMsg = document.getElementById("input-msg");
+const selectBox = document.getElementById("select-box");
 
 let inputMode = "string";
+let separator = " ";
 
 swapButton.addEventListener("click", () => {
 	changeInputMode();
+});
+
+selectBox.addEventListener("change", e => {
+	const value = e.target.value;
+	if (value === "space") {
+		separator = " ";
+	} else {
+		separator = ",";
+	}
 });
 
 copyButton.addEventListener("click", async () => {
@@ -33,7 +44,7 @@ convertButton.addEventListener("click", () => {
 	if (inputMode === "string") {
 		output.value = convertTextToBinary(value);
 	} else {
-		output.value = convertBinaryToText(value.split(" "));
+		output.value = convertBinaryToText(value.split(separator));
 	}
 });
 
@@ -68,12 +79,14 @@ function changeInputMode() {
 
 		input.placeholder = "Enter binary here";
 		inputMode = "binary";
+		document.title = "Binary To Text";
 	} else {
 		inputLabel.innerText = "Text Input";
 		outputLabel.innerText = "Binary Output";
 
 		input.placeholder = "Enter Text here";
 		inputMode = "string";
+		document.title = "Text To Binary";
 	}
 	input.value = "";
 	output.value = "";
@@ -84,7 +97,7 @@ function convertTextToBinary(str, i = 0) {
 
 	if (i === str.length - 1) return decimalToBinary(ascii);
 
-	return decimalToBinary(ascii) + " " + convertTextToBinary(str, ++i);
+	return decimalToBinary(ascii) + separator + convertTextToBinary(str, ++i);
 }
 
 function convertBinaryToText([first, ...rest]) {

@@ -11,6 +11,7 @@
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
+	font-family: sans-serif;
 }
 
 h1 {
@@ -39,6 +40,7 @@ textarea {
 	resize: none;
 	padding: 10px;
 	font-size: 20px;
+	font-family: monospace;
 }
 
 .btn {
@@ -114,6 +116,28 @@ textarea {
 
 .success-msg {
 	color: green;
+}
+
+.select-box {
+	padding-bottom: 20px;
+	display: grid;
+}
+
+.select-box label {
+	padding: 5px;
+}
+
+.select-box select {
+	padding-left: 3px;
+	width: 200px;
+	outline: none;
+	border-radius: 10px;
+	height: 30px;
+}
+
+.select-box select:focus {
+	outline: 1px solid black;
+	border-radius: 10px;
 }
 
 @media (max-width: 920px) {
