@@ -3,6 +3,7 @@ const output = document.getElementById("output");
 const convertButton = document.getElementById("convert-btn");
 const swapButton = document.getElementById("swap-btn");
 const copyButton = document.getElementById("copy-btn");
+const inputMsg = document.getElementById("input-msg");
 
 let inputMode = "string";
 
@@ -14,7 +15,11 @@ copyButton.addEventListener("click", async () => {
 	try {
 		if (!output.value) return;
 		await navigator.clipboard.writeText(output.value);
-		alert("Copied!");
+		copyButton.innerText = "Copied ✔️";
+
+		setTimeout(() => {
+			copyButton.innerText = "Copy";
+		}, 2000);
 	} catch (err) {
 		console.log(err);
 	}
@@ -33,14 +38,19 @@ convertButton.addEventListener("click", () => {
 });
 
 input.addEventListener("input", e => {
+	input.classList.remove("input-error");
+	inputMsg.innerText = "";
 	const value = e.target.value;
 
 	if (inputMode === "string") return;
 
 	if (!value) return;
 
-	if (!/[01]+$/g.test(value)) {
-		alert("Invalid Binary");
+	for (const char of value) {
+		if (!/^[0-1]|\s|,/.test(char)) {
+			input.classList.add("input-error");
+			inputMsg.innerText = "Invalid Binary";
+		}
 	}
 });
 

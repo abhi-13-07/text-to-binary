@@ -102,6 +102,20 @@ textarea {
 	display: block;
 }
 
+.input-error {
+	color: red;
+	border: 1px solid red;
+	outline: 1px solid red;
+}
+
+.error-msg {
+	color: red;
+}
+
+.success-msg {
+	color: green;
+}
+
 @media (max-width: 920px) {
 	.flex-center-between {
 		flex-direction: column;
